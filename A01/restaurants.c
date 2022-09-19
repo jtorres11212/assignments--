@@ -33,7 +33,7 @@ int main() {
     printf("%s is open!\n",Res1.name);}  
     if (time >=Res2.open && time <Res2.close){
     printf("%s is open!\n",Res2.name);}
-    if (time >=Res3.open && time <Res3.close);{
+    if (time >=Res3.open && time <Res3.close){
     printf("%s is open!\n",Res3.name);}
     if (time >Res1.open){
     printf("%s opens at %d!\n",Res1.name,Res1.open);}
