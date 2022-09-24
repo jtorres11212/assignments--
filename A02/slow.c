@@ -4,22 +4,22 @@
 
 int main() {
   int len;
-  char words[32];
+  char wrds[32];
   printf("JSNFJN Pause Length:");
   scanf("%d",&len);
   printf("GIMME WORDS\n");
-  scanf("%s",words);
+  scanf("%s",wrds);
   char *lot=NULL;
   lot= malloc(sizeof(char)*32);
-  int woo=0;
-  int boo=0;
-  while(boo<strlen(words)){
-  lot[woo]=words[boo];
-  boo=boo+1;
+  int WOO=0;
+  int BOO=0;
+  while(BOO<strlen(wrds)){
+  lot[WOO]=wrds[BOO];
+  BOO=BOO+1;
   for(int i=1; i<=len; i++){
-    lot[woo+i]='.';
+    lot[WOO+i]='.';
   }
-  woo=woo+1+len;
+  WOO=WOO+1+len;
   }
   printf("%s\n",lot);
   free(lot);
