@@ -9,23 +9,21 @@ struct dres{
 };
 
 int main() {
-  char temp;
   int nres;
   printf("UwU\nhow many restuaraunts?\n");
-  scanf("%d",&nres);
+  scanf("%d%*c",&nres);
   struct dres *p;
-  p = malloc(sizeof(p)*(900));
+  p = malloc(sizeof(struct dres)*nres);
   for(int i=1; i<=nres; i++){
     printf("Whats the name of the restaurant?\n");
     scanf(" %[^\n]%*c",p[i].name);
     printf("How well liked is this restaurant?(rating)\n");
-    scanf("%g",&p[i].rating);
-    scanf("%c",&temp);
+    scanf("%g%*c",&p[i].rating);
     printf("When does the restaurant open?\n");
-    scanf("%d",&p[i].open);
+    scanf("%d%*c",&p[i].open);
 
     printf("When does the restaurant close?\n");
-    scanf("%d",&p[i].close);
+    scanf("%d%*c",&p[i].close);
   }
   for(int i=0; i<=nres; i++){
     printf("%d)  name:%s  open:%d close:%d  rating:%g\n",i,

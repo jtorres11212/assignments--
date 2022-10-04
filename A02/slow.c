@@ -5,12 +5,12 @@
 int main() {
   int len;
   char wrds[32];
-  printf("JSNFJN Pause Length:");
+  printf("Pause Length:");
   scanf("%d",&len);
   printf("GIMME WORDS\n");
   scanf("%s",wrds);
   char *lot=NULL;
-  lot= malloc(sizeof(char)*32);
+  lot= malloc(sizeof(char)*strlen(wrds)*(len+1)+1);
   int WOO=0;
   int BOO=0;
   while(BOO<strlen(wrds)){
@@ -21,7 +21,8 @@ int main() {
   }
   WOO=WOO+1+len;
   }
+  lot[WOO]='\0';
   printf("%s\n",lot);
   free(lot);
-  return 0;
+  return 0;\
 }
