@@ -33,10 +33,10 @@ int main(int argc,char*argv[]) {
 int newlc;
   while((c=fgetc(txt))!=EOF){
     if(c="{"){
-      //push to stack
+      psh(c);
     }
     if(c="}"){
-      //pop to stack
+      pop(c);
     }
     if(c="\n"){
       newlc=newlc+1;
