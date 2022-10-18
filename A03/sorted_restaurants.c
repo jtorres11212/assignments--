@@ -80,6 +80,7 @@ int main(){
   struct node* deleted=head;
   while(current!=NULL){
     current=current->next;
+    head=current;
     free(deleted);
     deleted=head;
   }
