@@ -21,7 +21,6 @@ int main() {
     scanf("%g%*c",&p[i].rating);
     printf("When does the restaurant open?\n");
     scanf("%d%*c",&p[i].open);
-
     printf("When does the restaurant close?\n");
     scanf("%d%*c",&p[i].close);
   }
