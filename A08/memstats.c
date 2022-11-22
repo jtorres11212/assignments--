@@ -17,6 +17,29 @@ struct chunk {
 };
 
 void memstats(struct chunk* freelist, void* buffer[], int len) {
+  int ta=0;
+  int tb=0;
+  int usa=0;
+  int usb=0;
+  int fa=0;
+  int fb=0;
+  int un=0;
+  struct chunk *f=freelist;
+  while(f!=NULL){
+    fb++;
+    fb=fb+f->size;
+    f=f->next;
+  }
+  for(int i=0;i<len;i++){
+    if(buffer[i]!=NULL){
+      usa++;
+      struct chunk *cnk=(struct chunk*)((struct chunk*)buffer[i]-1);
+    }
+  }
+  tb=usb+fb;
+  float unut=(float)un/tb;
+  ta=fa+usa;
+  printf("Total b̷̧̧̧̼̙̬̤̝̻̐̋̀̓̍̓͑̓̿̑͠ḽ̶̃̍̒̋o̶̡̨͈̰̬̞͎̥̲̓̍͐̉̈͜͜ͅc̷̛͖̹̘̈́̃̏̏͂͂͊͊̍́́̌̚͝k̵̖̲̪̤͑͛̆̿͂s̷͎̗͈̺̗̰̹̞͚͓̩͕̗̠̒̇͑͆̒͆:%d \nFree b̷̧̧̧̼̙̬̤̝̻̐̋̀̓̍̓͑̓̿̑͠ḽ̶̃̍̒̋o̶̡̨͈̰̬̞͎̥̲̓̍͐̉̈͜͜ͅc̷̛͖̹̘̈́̃̏̏͂͂͊͊̍́́̌̚͝k̵̖̲̪̤͑͛̆̿͂s̷͎̗͈̺̗̰̹̞͚͓̩͕̗̠̒̇͑͆̒͆:%d\nUsed b̷̧̧̧̼̙̬̤̝̻̐̋̀̓̍̓͑̓̿̑͠ḽ̶̃̍̒̋o̶̡̨͈̰̬̞͎̥̲̓̍͐̉̈͜͜ͅc̷̛͖̹̘̈́̃̏̏͂͂͊͊̍́́̌̚͝k̵̖̲̪̤͑͛̆̿͂s̷͎̗͈̺̗̰̹̞͚͓̩͕̗̠̒̇͑͆̒͆:%d \nTotal memory allocated:%d \nFreed memory:%dUsed memory:%d \nUnderutilized Memory:%.2f \n",ta,fa,usa,tb,fb,usb,unut);
 }
 
 int main ( int argc, char* argv[]) {
