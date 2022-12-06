@@ -13,7 +13,6 @@ int main(int argc, char* argv[]) {
   float ymin = -1.12;
   float ymax = 1.12;
   int maxIterations = 1000;
-
   int opt;
   while ((opt = getopt(argc, argv, ":s:l:r:t:b:")) != -1) {
     switch (opt) {
@@ -28,11 +27,53 @@ int main(int argc, char* argv[]) {
   printf("Generating mandelbrot with size %dx%d\n", size, size);
   printf("  X range = [%.4f,%.4f]\n", xmin, xmax);
   printf("  Y range = [%.4f,%.4f]\n", ymin, ymax);
-
-  // todo: your work here
-  // generate pallet
   srand(time(0));
+struct ppm_pixel *palette = malloc(sizeof(struct ppm_pixel)* maxIterations);
+for(int i=0; i<maxIterations; i++){
+  palette[i].red = rand() % 255;
+  palette[i].green = rand() %255;
+  palette[i].blue = rand()% 255;
+}
 
-  // compute image
+struct ppm_pixel * pixels = malloc(sizeof(struct ppm_pixel)*size *size);
 
+double timer;
+struct timeval tstart, tend; 
+  gettimeofday(&tstart, NULL);
+for(int i= 0; i<size; i++){
+  for(int j=0; j<size; j++){
+    float xfrac = (float) (j/size);
+    float yfrac = (float) (i/size);
+    float x0 = xmin + xfrac * (xmax - xmin);
+    float y0 = ymin + yfrac * (ymax - ymin);
+  
+    float x = 0.0;
+    float y = 0.0;
+    int iter = 0;
+    while (iter < maxIterations && x*x + y*y < 2*2){
+      float xtmp = x*x - y*y + x0;
+      y = 2*x*y + y0;
+      x = xtmp;
+      iter++;
+    }
+    if(iter < maxIterations){
+      pixels[i][j] = palette[iter];
+    }
+    else{
+      pixels[i][j].red = 0;
+      pixels[i][j].green = 0;
+      pixels[i][j].blue = 0;
+    }
+  }
+}
+gettimeofday(&tend, NULL);
+timer = tend.tv_sec - tstart.tv_sec + (tend.tv_usec-tstart.tv_usec)/1.e6;
+int timestamp = time(0);
+printf("Computed mandelbrot set (%dx%d) in %f seconds\n", size, size,timer);
+  char fp[100];
+  sprintf(fp, "mandelbrot-%d-%d.ppm", size, timestamp);
+  printf("Writing file: %s\n", fp);
+  write_ppm(fp, pixels, size, size);
+  free(pixels);
+  free(palette);
 }
