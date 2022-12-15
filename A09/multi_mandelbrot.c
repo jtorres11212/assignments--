@@ -87,43 +87,17 @@ if(pixels ==(void*)-1){
 }
 double timer;
 struct timeval tstart, tend; 
-gettimeofday(&tstart, NULL);
-for (int i= 0; i <4; i++){
-  fflush(stdout);
-  int pid =  fork();
-  if (pid == 0){
-    if ( i == 0){
-      printf("%d)Sub-image block: cols (0, 240) to rows (0,240)\n", getpid());
-      fflush(stdout);
-(s, 0, 240, 0, 240,  palette, size,maxIterations, xmin, ymin, xmax,  ymax);
-    }
-    else if(i == 1){
-      printf("%d)Sub-image block: cols (240, 480) to rows (0,240)\n", getpid());
-      fflush(stdout);
-(s, 240, 480, 0, 240,  palette, size,maxIterations, xmin, ymin, xmax,  ymax);
-    }
-    else if(i == 2){
-      printf("%d)Sub-image block: cols (0, 240) to rows (240,480)\n", getpid());
-      fflush(stdout);
-(s, 0, 240, 240, 480,  palette, size,maxIterations, xmin, ymin, xmax,  ymax);
-    }
-
-    else if(i == 3){
-      printf("%d)Sub-image block: cols (240, 480) to rows (240,480)\n", getpid()); 
-      fflush(stdout);
-(s, 240, 480, 240, 480,  palette, size,maxIterations, xmin, ymin, xmax,  ymax);
-    }
-     exit(0);
-  }
-  else{
-    printf("Launched child process: %d\n", pid);
-  }
-}
-  for (int i = 0; i < 4; i++) {
-    int status;
-    int pid = wait(&status);
-    printf("Child process complete: %d\n", pid);
-  }
+gettimeofday(&tstart, NULL);long id1 = 1, id2 = 2; 
+long* retval1 = NULL, retval2 = NULL; 
+pthread_t thread1, thread2, thread3, thread4; 
+pthread_create(&thread1, NULL, pixels, &id1); 
+pthread_create(&thread2, NULL, pixels, &id2);
+pthread_create(&thread3, NULL, pixels, &id3);
+pthread_create(&thread4, NULL, pixels, &id4);  
+pthread_join(thread1, NULL); 
+pthread_join(thread2, NULL);
+pthread_join(thread3, NULL);
+pthread_join(thread4, NULL);
 gettimeofday(&tend, NULL);
 
 timer = tend.tv_sec - tstart.tv_sec + (tend.tv_usec-tstart.tv_usec)/1.e6;
