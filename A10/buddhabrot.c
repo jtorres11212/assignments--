@@ -8,13 +8,13 @@
 #include "write_ppm.h"
 
 int main(int argc, char* argv[]) {
-  int size = 480;
-  float xmin = -2.0;
-  float xmax = 0.47;
-  float ymin = -1.12;
+  int size =480;
+  float xmin=-2.0;
+  float xmax= 0.47;
+  float ymin= -1.12;
   float ymax = 1.12;
-  int maxIterations = 1000;
-  int numProcesses = 4;
+  int max=1000;
+  int numProcesses=4;
 
   int opt;
   while ((opt = getopt(argc, argv, ":s:l:r:t:b:p:")) != -1) {
@@ -28,13 +28,13 @@ int main(int argc, char* argv[]) {
         "-b <ymin> -t <ymax> -p <numProcesses>\n", argv[0]); break;
     }
   }
-  printf("Generating mandelbrot with size %dx%d\n", size, size);
+  printf("Generatin  mandelbrot with size %dx%d\n", size, size);
   printf("  Num processes = %d\n", numProcesses);
   printf("  X range = [%.4f,%.4f]\n", xmin, xmax);
   printf("  Y range = [%.4f,%.4f]\n", ymin, ymax);
   srand(time(0));
-  struct ppm_pixel *pal=malloc(sizeof(struct ppm_pixel)*maxIterations);
-  for(int i=0;i<maxIterations; i++){
+  struct ppm_pixel *pal=malloc(sizeof(struct ppm_pixel)*max);
+  for(int i=0;i<max; i++){
     pal[i].red=rand() %255;
     pal[i].green=rand() %255;
     pal[i].blue=rand() %255;
@@ -59,12 +59,12 @@ int main(int argc, char* argv[]) {
       printf("%d. Sub image block: collumns 0,240 to rows 0,240")
       data[i].id=1;
       data[i].pix=pix;
-      data[i].start_col=0;
-      data[i].end_col=240;
-      data[i].start_row=0;
-      data[i].end_row=240;
+      data[i].strtcol=0;
+      data[i].endcol=240;
+      data[i].startrow=0;
+      data[i].endrow=240;
       data[i].pal=pal;
-      data[i].maxIterations=maxIterations;
+      data[i].max=max;
       data[i].xmin=xmin;
       data[i].ymin=ymin;
       data[i].xmax=xmax;
@@ -78,12 +78,12 @@ int main(int argc, char* argv[]) {
       printf("%d. Sub image block: collumns 240,480 to rows 0,240")
       data[i].id=i;
       data[i].pix=pix;
-      data[i].start_col=0;
-      data[i].end_col=240;
-      data[i].start_row=0;
-      data[i].end_row=240;
+      data[i].strtcol=0;
+      data[i].endcol=240;
+      data[i]start_row=0;
+      data[i]end_row=240;
       data[i].pal=pal;
-      data[i].maxIterations=maxIterations;
+      data[i].max=max;
       data[i].xmin=xmin;
       data[i].ymin=ymin;
       data[i].xmax=xmax;
@@ -97,12 +97,12 @@ if(i=2){
       printf("%d. Sub image block: collumns 0,240 to rows 0,240")
       data[i].id=i;
       data[i].pix=pix;
-      data[i].start_col=0;
-      data[i].end_col=240;
-      data[i].start_row=240;
-      data[i].end_row=480;
+      data[i].strtcol=0;
+      data[i].endcol=240;
+      data[i]start_row=240;
+      data[i]end_row=480;
       data[i].pal=pal;
-      data[i].maxIterations=maxIterations;
+      data[i].max=max;
       data[i].xmin=xmin;
       data[i].ymin=ymin;
       data[i].xmax=xmax;
@@ -116,12 +116,12 @@ if(i=3){
       printf("%d. Sub image block: collumns 0,240 to rows 0,240")
       data[i].id=i;
       data[i].pix=pix;
-      data[i].start_col=240;
-      data[i].end_col=480;
-      data[i].start_row=240;
-      data[i].end_row=480;
+      data[i].strtcol=240;
+      data[i].endcol=480;
+      data[i]start_row=240;
+      data[i]end_row=480;
       data[i].pal=pal;
-      data[i].maxIterations=maxIterations;
+      data[i].max=max;
       data[i].xmin=xmin;
       data[i].ymin=ymin;
       data[i].xmax=xmax;
@@ -146,6 +146,5 @@ if(i=3){
   free(pal);
   free(mem);
   free(count);
-  // todo: your code here
-  // compute image
+  
 }
